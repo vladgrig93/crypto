@@ -1,5 +1,23 @@
-<h1>Your Crypto Trades</h1>
+<h1 style='color:white'>Your Crypto Trades</h1>
 
-<ul *ngFor='let trade of cryptoList'>
-  <li>{{trade.name}} {{trade.date}} {{trade.pricethen}} {{trade.totalthen}}</li>
-</ul>
+<table class="highlight">
+  <tr style="color:whitesmoke">
+    <th>Crypto</th>
+    <th>Date of Trade</th> 
+    <th>Time of Trade</th>
+    <th>Amount Received</th>
+    <th>Price/Coin Traded(Fiat)</th>
+    <th>Trade Amount(Fiat)</th>
+    <th>Percent Change</th>
+    <th>Percent Change</th>
+    <th>Net Gain/Loss(Fiat)</th>
+  </tr>
+  <tr *ngFor='let trade of cryptoList'  style="color:black">
+    <td>{{trade.name}}</td>
+    <td>{{trade.date}} </td> 
+    <td>{{trade.time}}</td>
+    <td>{{trade.amount}}</td>
+    <td>{{trade.pricethen}}</td>
+    <td>{{trade.totalthen}}</td>
+  </tr>
+</table>

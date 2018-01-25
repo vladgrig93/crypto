@@ -30,32 +30,31 @@ module.exports={
         },
 
     addNewTrade:function(req,res){
-
         Crypto.findOne({_id:req.body.coinid}, function(err, foundCrypto){
 			if(foundCrypto!= null){
 				console.log("found crypto in DB", foundCrypto);
                 foundCrypto.pricethen=req.body.singlevalue;
                 foundCrypto.totalthen=req.body.totalvalue;
-                foundCrypto.owner=req.session.userId
+                foundCrypto.owner=req.session.userId;
                 foundCrypto.save(function(err){
                     if(err){
-                        console.log('cant save updates to crypto')
-                        console.log(err)
+                        console.log('cant save updates to crypto');
+                        console.log(err);
                     }else{
-                        console.log('crypto updated', foundCrypto)
-                        console.log('now updating user')
-                        User.findOne({_id:req.session.userId}, function(err, foundUser){
-                            if(foundUser!=null){
-                                console.log('found user in DB to update crypto on', foundUser);
-                                foundUser.crypto.push(req.body.coinid);
-                                foundUser.save(function(err){
-                                    if(err){
-                                        console.log('cant push crypto to user', err)
-                                    }
-                                    else{
-                                        console.log('user updated with crypto', foundUser)
-                                    }
-                                })
+                        console.log('crypto updated', foundCrypto);
+                        console.log('now updating user');
+                        User.update({_id:req.session.userId}, {$push: {crypto:req.body.coinid}},function(err, foundOwner){
+                            if(foundOwner!=null){
+                                console.log('found user in DB to update crypto on', foundOwner);
+                                // foundOwner.crypto.push(req.body.coinid);
+                                // foundOwner.save(function(err){
+                                    // if(err){
+                                    //     console.log('cant push crypto to user', err)
+                                    // }
+                                    // else{
+                                    //     console.log('user updated with crypto')
+                                    // }
+                                // })
                             }
                             else{
                                 console.log('user not found', err)
@@ -115,13 +114,12 @@ module.exports={
 				// Verify the passwords using bcrypt
 				bcrypt.compare(req.body.password, foundUser.password)
 				.then(function(data){
-					console.log("passwords match");
 					req.session.userId = foundUser._id;
                     res.json(foundUser)
 					// Once logged in, add the user to session and redirect
 				})
 				.catch(function(error){
-					console.log("passwords don't match");
+					console.log("passwords don't match", error);
 					res.json(1);
 				})
 			}
