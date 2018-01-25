@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CryptoTrack</title>
+</head>
+
+<body>
+
+<h5 class="flow-text" style="color:white;display:inline-block;padding:20px;width:720px;margin-bottom:50px;border:solid-white 2px;border-radius:5px">cryptoSwitch</h5>
+
+
+<a [routerLink]="['mydash']" (click)='onHomeClick()'>{{currentUser.firstname}} {{currentUser.lastname}}</a> <a [routerLink]="['convert']" (click)='otherClick()'>Convert</a>  <a [routerLink]="['contact']"(click)='otherClick()'>Contact Us</a>
+<a href='javascript:void(0)' (click)='onSignOut()'>Sign-Out</a>
+
+<div *ngIf=" !homeClicked && !otherClicked ; else routeit">
+<app-mydash></app-mydash>
+</div>
+
+<div style="margin-bottom:0px;"> 
+<ng-template #routeit>
+  <router-outlet></router-outlet>
+</ng-template>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+
+<h6 class="flow-text" style="color:white;text-align:center;font-size:20px;">You will gain full access to all the exclusive features of cryptoswitch such as:adding or removing trades, viewing trade history, tracking portfolio performance, and much more.</h6>
+
+<div style='text-align:center'>
+  <div class="flow-text" style="display:inline-block;border:0px;">  
+    <p style="color:white;"><b>Sign-Up</b></p>
+      <form (submit)="register()" #registerForm='ngForm'>
+        <p style="color:white;">First Name:</p> <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="text" name="firstname" [(ngModel)]="newUser.firstname" #firstname="ngModel" minlength='2'>
+        <p style="color:white;">Last Name:</p> <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="text" name="lastname" [(ngModel)]="newUser.lastname" #lastname="ngModel" minlength='2'>
+        <p style="color:white;">Email: </p><input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="text" name="email" [(ngModel)]="newUser.email" #email="ngModel">
+        <p style="color:white;">Password:</p> <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="password" name="password" [(ngModel)]="newUser.password" #password="ngModel" minlength="8">
+        <p *ngIf='password.invalid && password.touched' [ngStyle]="{'color':'red'}">Password must be at least 8 characters long</p>
+        <p style="color:white;">Password Confirmation: </p><input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="password" name="passwordConfirm" [(ngModel)]="newUser.passwordConfirm" #passwordConfirm="ngModel">
+        
+        <input type="submit" value="Sign-Up" [disabled]=registerForm.invalid class="btn waves-effect waves-light">
+      </form>
+
+  </div>
+</div>

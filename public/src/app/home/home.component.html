@@ -1,0 +1,63 @@
+<h1>Quick Convert</h1>
+<fieldset style='display:inline-block;border:0px'>
+  <form (submit)='convert()' #Form='ngForm'>
+    <p style='color:white;'><b>Crypto-Currency:</b></p>
+    <select name='name' [(ngModel)]="newCoin.name" class='browser-default'>
+      <option *ngFor='let coin of coins' >{{coin}} </option>
+    </select>
+
+
+
+  <p style='color:white;'><b>Date of Trade:</b></p>
+    <input style='background-color:whitesmoke;border-radius:5px;' type="date" name='date' [(ngModel)]="newCoin.date">
+
+
+  <p style='color:white;'><b>Time of Trade:(UTC)</b></p>
+  <input style='background-color:whitesmoke;border-radius:5px;' type="time" name='time'[(ngModel)]="newCoin.time">
+
+
+  <p style='color:white;'><b>Amount Received</b></p>
+    <input style='background-color:whitesmoke;border-radius:5px;' type="number" name='amount'[(ngModel)]="newCoin.amount">
+  <input type="submit" value='Convert' class="btn waves-effect waves-light">
+
+  </form>
+</fieldset>
+
+
+<fieldset style='display:inline;vertical-align:top;border:0px;margin-left:300px;'>
+<div *ngIf='error1'>
+  <div class="flow-text" style='color:red;font-size:18px;'>
+    <p>Sorry, price data for {{newCoin.name}} does not exist for the specified date-time.</p>
+    <p>Please try a more recent date</p>
+  </div>
+</div>
+<div *ngIf='success'  style='-webkit-transition: width 2s, height 4s;
+    transition: width 2s, height 4s'>
+    <h3 style='color:white;'>Crypto Performance</h3>
+    <ul>
+    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text">A single <b>{{newCoin.name}}</b> was worth <b>{{singlevalue | currency:'$' : 4}}</b> at the time of the trade</li>
+    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text">Total worth of <b>{{newCoin.name}}</b> from the trade was <b>{{totalvalue | currency:'USD'}}</b> </li>
+    
+    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='singlenet'>As of now <b>{{newCoin.name}}</b> is up <span style='color:#0ED7A9'>{{coindelta | percent:'1.2-2'}} ({{singledifference | currency:'USD':'1.5-5'}})</span> at <b>{{currentprice | currency:'USD':'1.2-2'}}</b></li>
+    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!singlenet'>As of now <b>{{newCoin.name}}</b> is down <span style='color:#F47454'>{{coindelta | percent:'1.2-2'}} ({{singledifference | currency:'USD':'1.5-5'}})</span> at <b>{{currentprice | currency:'USD':'1.2-2'}}</b></li>
+
+    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='net'>You have a net <b>profit</b> of <span style='color:#0ED7A9'>{{difference | currency:'USD':'1.2-2'}}</span></li>
+    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!net'>You have a net <b>loss</b> of <span style='color:#F47454'>{{difference | currency:'USD':'1.2-2'}}</span></li>
+    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!net'>HODL on!</li>
+    </ul>
+</div>
+
+<div *ngIf='message && success'>
+  <form (submit)='addtoPort()' #Form='ngForm'>
+    <!--<input type="text" name='name' value={{newCoin.name}} [(ngModel)]="saveTrade.name">
+    <input type="hidden" name='date' [(value)]='newCoin.date'[(ngModel)]="saveTrade.date">
+    <input type="hidden" name='time' [(value)]='newCoin.time' [(ngModel)]="saveTrade.time">
+    <input type="hidden" name='amount' [(value)]='newCoin.amount'[(ngModel)]="saveTrade.amount">
+    <input type="hidden" name='pricethen' [(value)]='singlevalue' [(ngModel)]="saveTrade.pricethen">
+    <input type="hidden" name='totalthen' [(value)]='totalvalue' [(ngModel)]="saveTrade.totalthen">-->
+    <input class="btn waves-effect waves-light" type="submit" value='Add Trade to Portfolio'>
+  </form>
+</div>
+
+
+</fieldset>
