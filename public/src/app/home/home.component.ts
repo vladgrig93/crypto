@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import {DataService} from './../data.service';
 import { Router } from '@angular/router';
 
+declare var jQuery:any;
+ 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+elementRef: ElementRef;
 objectKeys=Object.keys;//doing this because API is composed of objects, not arrays
 fullres:any;
 coins:any=[];
@@ -26,13 +29,37 @@ coindelta:any;
 error1:boolean;
 success:boolean;
 message:boolean;
-// saveTrade:any={name:"", date:"", time:"", amount:"", pricethen:"",totalthen:""}
 tradedata:any;
 tradeObject:any={coinid:"", singlevalue:"", totalvalue:""}
+portclicked:any;
 
-  constructor(private _DataService:DataService, private _Router:Router){}
+  constructor(private _DataService:DataService, private _Router:Router, @Inject(ElementRef) private _elementRef: ElementRef){
+            this.elementRef = _elementRef;
+
+  }
 
 ngOnInit(){
+    jQuery(this.elementRef.nativeElement).find('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+  jQuery(this.elementRef.nativeElement).find('.timepicker').pickatime({
+    default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: false, // Use AM/PM or 24-hour format
+    donetext: 'OK', // text for done-button
+    cleartext: 'Clear', // text for clear-button
+    canceltext: 'Cancel', // Text for cancel-button
+    autoclose: false, // automatic close timepicker
+    ampmclickable: true, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
+  })
+
+  this.portclicked=false;
   this._DataService.getAllCoins().subscribe((data:any)=>{
     this.fullres=data;
     for(var value in data.Data){
@@ -41,19 +68,15 @@ ngOnInit(){
   })
   this._DataService.currentMessage.subscribe(message => this.message = message)
   // this.newMessage();
-  console.log('message in child convert', this.message)
+  // console.log('message in child convert', this.message)
 }
 
 addtoPort(){
-
   this._DataService.addCryptoPort(this.tradeObject).subscribe((data:any)=>{
-      // this.tradedata=JSON.parse(data['_body']);
-      // this.tradedata.pricethen=this.singlevalue;
-      // this.tradedata.totalthen=this.totalvalue;
       console.log('got back trade data to the component', this.tradedata)
-        // console.log('form data is', this.newCoin.name)
-
   })
+    this.portclicked=true;
+
 }
 
 convert(){
@@ -108,5 +131,7 @@ convert(){
     })
   
   })
+    this.portclicked=false;
+
 }
 }

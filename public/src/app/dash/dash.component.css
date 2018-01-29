@@ -1,8 +1,8 @@
-* {
+/** {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+}*/
 
 
 a{
@@ -12,9 +12,16 @@ a{
 
 
 html,body{
-    margin:0 auto;
+    /*margin:0 auto;*/
 background: #4B79A1;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to top, #4B79A1,#283E51);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to top, #4B79A1,#283E51); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
+
+@font-face {
+    font-family: 'earthorb';
+    src:url('./../../assets/fonts/nasalization-rg.ttf');
+    font-weight: normal;
+    font-style: normal;
 }

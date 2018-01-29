@@ -13,9 +13,11 @@ export class DataService {
   price:any;
   scrollresult:any;
   res:any;
+  portprices:any;
 
   private messageSource = new BehaviorSubject<boolean>(false);
   currentMessage = this.messageSource.asObservable();
+
 
   constructor(private _http:Http) {
     
@@ -42,25 +44,31 @@ export class DataService {
   }
 
   getCurrent(name){
-    console.log('getting current price for ', name);
     return this._http.get('https://min-api.cryptocompare.com/data/price?fsym='+name+'&tsyms=BTC,USD,EUR')
     .map(price => this.price= price.json());
-
   }
 
-  convertCoin(coin){
-    console.log('hit data service showing coin',coin)
-    return this._http.post('/addCoin', coin)
+  getCurrentforPort(names){
+    console.log('getting current prices for portfolio', names);
+    return this._http.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms='+names+'&tsyms=USD')
+    .map(portprices => this.portprices= portprices.json());
 
+}
+
+  convertCoin(coin){
+    return this._http.post('/addCoin', coin)
   }
 
   addCryptoPort(tradeObj){
-    console.log('hit trade object data service', tradeObj)
     return this._http.post('/addTrade',tradeObj)
   }
 
   getUserPort(){
     return this._http.get('/myport');
+  }
+
+  deleteTrade(id){
+    return this._http.get('/delete/'+id, id)
   }
 //USER FUNCTIONS
 

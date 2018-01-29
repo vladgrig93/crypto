@@ -81,6 +81,19 @@ module.exports={
             }
         })
     },
+
+    deleteTrade:function(req,res){
+        Crypto.remove({_id:req.params.id}, function(errors){
+            console.log('found crypto to delete with id', req.params.id)
+            if(errors){
+                console.log('cant delete', errors);
+            }else{
+                console.log('successfully deleted');
+                res.json(true)
+            }
+        })
+    },
+
     //USER FUNCTIONS
 
     register:function(req,res){

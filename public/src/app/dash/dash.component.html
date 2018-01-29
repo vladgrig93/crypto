@@ -9,23 +9,30 @@
 </head>
 
 <body>
+    <nav style='margin-bottom:30px;'>
+        <div class="nav-wrapper" style='background:#4B79A1'>
+          <div class="brand-logo">
+            <h5 class="flow-text" style="color:white;display:inline-block;border:solid-white 2px;border-radius:5px;font-family:earthorb;padding-left:20px">transCRYPTER</h5>
+          </div>
+          <ul class="right hide-on-med-and-down" style='padding-right:20px;'>
+            <li style='padding-right:15px'><a [routerLink]="['/home']" (click)='onHomeClick()'>Home</a></li>
+            <li style='padding-left:15px;padding-right:15px;'><a [routerLink]="['/convert']" (click)='otherClick()'>Convert</a></li>  
+            <li style='padding-left:15px;padding-right:15px;'><a [routerLink]="['/reg']"(click)='otherClick()' >SignUp</a></li>
+            <li style='padding-left:15px;padding-right:15px;'> <a [routerLink]="['/loginreg']"(click)='otherClick()'>SignIn</a></li>
+            <li> <a [routerLink]="['/contact']"(click)='otherClick()'>ContactUs</a></li>
+          </ul>
+        </div>
+    </nav>
+   
+  <div *ngIf=" !homeClicked && !otherClicked ; else routeit">
+    <app-main></app-main>
+  </div>
 
-<h5 class="flow-text" style="color:white;display:inline-block;padding:20px;width:720px;margin-bottom:50px;border:solid-white 2px;border-radius:5px">cryptoSwitch</h5>
-
-
-
-<div class="flow-text" style="display:inline;font-size:15px">
-<a [routerLink]="['/home']" (click)='onHomeClick()'>HOME</a>  <a [routerLink]="['/convert']" (click)='otherClick()'>CONVERT</a>  <a [routerLink]="['/reg']"(click)='otherClick()'>SIGN-UP</a>  <a [routerLink]="['/loginreg']"(click)='otherClick()'>SIGN-IN</a>  <a [routerLink]="['/contact']"(click)='otherClick()'>CONTACT US</a>
-</div>
-<div *ngIf=" !homeClicked && !otherClicked ; else routeit">
-<app-main></app-main>
-
-</div>
-<div style="margin-bottom:0px;"> 
-<ng-template #routeit>
-  <router-outlet></router-outlet>
-</ng-template>
-</div>
+  <div style="margin-bottom:0px;"> 
+    <ng-template #routeit>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </div>
 </body>
 
 </html>

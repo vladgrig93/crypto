@@ -1,28 +1,53 @@
-<h1>Quick Convert</h1>
-<fieldset style='display:inline-block;border:0px'>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+</head>
+
+<h6 style="color:white;padding-left:10px">Enter in trades made and track to view crypto-performance and coin-stats</h6>
+
+<div class="row">
   <form (submit)='convert()' #Form='ngForm'>
-    <p style='color:white;'><b>Crypto-Currency:</b></p>
-    <select name='name' [(ngModel)]="newCoin.name" class='browser-default'>
-      <option *ngFor='let coin of coins' >{{coin}} </option>
-    </select>
+    <div class="row">
+      <div class="input-field col s3">
+        <select id='cname' name='name' [(ngModel)]="newCoin.name" materialize="material_select">
+          <option *ngFor='let coin of coins'>{{coin}}</option>
+        </select>
+        <label for='cname' style='color:white;'>Crypto-Currency:</label>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="input-field col s3">
+        <input id='cdate' class="datepicker" type="text" name='date' [(ngModel)]="newCoin.date">
+        <label for="cdate" style='color:white;'>Date of Trade:</label>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="input-field col s3">
+        <input id='ctime' type="text" class="timepicker" name='time'[(ngModel)]="newCoin.time">
+        <label style='color:white;' for="ctime">Time of Trade:(UTC)</label>
+      </div>
+    </div>
 
-  <p style='color:white;'><b>Date of Trade:</b></p>
-    <input style='background-color:whitesmoke;border-radius:5px;' type="date" name='date' [(ngModel)]="newCoin.date">
+    <div class="row">
+      <div class="input-field col s3">
+        <input id='camount' type="number" name='amount'[(ngModel)]="newCoin.amount">
+        <label style='color:white;' for="camount">Amount Received</label>
+      </div> 
+    </div>    
+    <input type="submit" value='Convert' class="btn waves-effect waves-light">
+  </form>  
+</div>
+  
 
-
-  <p style='color:white;'><b>Time of Trade:(UTC)</b></p>
-  <input style='background-color:whitesmoke;border-radius:5px;' type="time" name='time'[(ngModel)]="newCoin.time">
-
-
-  <p style='color:white;'><b>Amount Received</b></p>
-    <input style='background-color:whitesmoke;border-radius:5px;' type="number" name='amount'[(ngModel)]="newCoin.amount">
-  <input type="submit" value='Convert' class="btn waves-effect waves-light">
-
-  </form>
-</fieldset>
-
+  
+ 
 
 <fieldset style='display:inline;vertical-align:top;border:0px;margin-left:300px;'>
 <div *ngIf='error1'>
@@ -31,7 +56,7 @@
     <p>Please try a more recent date</p>
   </div>
 </div>
-<div *ngIf='success'  style='-webkit-transition: width 2s, height 4s;
+<div *ngIf='success && !portclicked'  style='-webkit-transition: width 2s, height 4s;
     transition: width 2s, height 4s'>
     <h3 style='color:white;'>Crypto Performance</h3>
     <ul>
@@ -47,16 +72,15 @@
     </ul>
 </div>
 
-<div *ngIf='message && success'>
-  <form (submit)='addtoPort()' #Form='ngForm'>
-    <!--<input type="text" name='name' value={{newCoin.name}} [(ngModel)]="saveTrade.name">
-    <input type="hidden" name='date' [(value)]='newCoin.date'[(ngModel)]="saveTrade.date">
-    <input type="hidden" name='time' [(value)]='newCoin.time' [(ngModel)]="saveTrade.time">
-    <input type="hidden" name='amount' [(value)]='newCoin.amount'[(ngModel)]="saveTrade.amount">
-    <input type="hidden" name='pricethen' [(value)]='singlevalue' [(ngModel)]="saveTrade.pricethen">
-    <input type="hidden" name='totalthen' [(value)]='totalvalue' [(ngModel)]="saveTrade.totalthen">-->
-    <input class="btn waves-effect waves-light" type="submit" value='Add Trade to Portfolio'>
-  </form>
+
+  <div *ngIf='message && success && !portclicked'>
+    <form (submit)='addtoPort()' #Form='ngForm'>
+      <input class="btn waves-effect waves-light" type="submit" value='Add Trade to Portfolio'>
+    </form>
+  </div>
+
+<div *ngIf='portclicked && success'>
+  <h1>Trade added to Portfolio!</h1>
 </div>
 
 

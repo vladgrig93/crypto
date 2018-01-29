@@ -6,18 +6,27 @@
     <th>Date of Trade</th> 
     <th>Time of Trade</th>
     <th>Amount Received</th>
-    <th>Price/Coin Traded(Fiat)</th>
-    <th>Trade Amount(Fiat)</th>
-    <th>Percent Change</th>
-    <th>Percent Change</th>
+    <th>Trade Price per Crypto</th>
+    <th>Current Price per Crypto</th>
+    <th>Total Trade Amount</th>
     <th>Net Gain/Loss(Fiat)</th>
+    <th>Trade Performance</th>
   </tr>
-  <tr *ngFor='let trade of cryptoList'  style="color:black">
-    <td>{{trade.name}}</td>
-    <td>{{trade.date}} </td> 
-    <td>{{trade.time}}</td>
-    <td>{{trade.amount}}</td>
-    <td>{{trade.pricethen}}</td>
-    <td>{{trade.totalthen}}</td>
+  <tr *ngFor='let stat of afterArray' style="color:black;overflow:scroll">
+    <td>{{stat.name}}</td>
+    <td>{{stat.date}} </td> 
+    <td>{{stat.time}}</td>
+    <td>{{stat.amount}}</td>
+    <td>{{stat.pricethen}}</td>
+    <td>{{stat.currentprice}}</td>
+    <td>{{stat.totalthen}}</td>
+    <td>{{stat.difference}}</td>
+    <td>{{stat.change}}</td>
+    <td><a href='javascript:void(0)' (click)='onDelete(stat.id)'>Delete Trade</a></td>
   </tr>
 </table>
+  <h3>Performance</h3>
+
+    <p>Total invested={{totalinvested}}</p>
+    <p>Netgain={{netgain}}</p>
+    <p>% Change={{portdelta}}</p>

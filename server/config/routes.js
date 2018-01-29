@@ -12,6 +12,7 @@ module.exports=function(app){
     app.get('/logout', Users.logOff);
     app.get('/currentuser',Users.getCurrent);
     app.get('/myport', Users.getPort);
+    app.get('/delete/:id', Cryptos.deleteTrade);
 
     app.all("*", (request, response) => { response.sendFile(path.resolve("./public/dist/index.html")) });
     }
