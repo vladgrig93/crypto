@@ -1,6 +1,7 @@
 var mongoose=require('mongoose');
 var Crypto=mongoose.model('Crypto');
 var User=mongoose.model('User');
+var Contact=mongoose.model('Contact');
 var bcrypt = require('bcrypt-as-promised');
 
 
@@ -89,7 +90,11 @@ module.exports={
                 console.log('cant delete', errors);
             }else{
                 console.log('successfully deleted');
-                res.json(true)
+                this.getPort;
+                console.log('got updated trades', res._body)
+                res.json(res._body)
+
+
             }
         })
     },
@@ -154,5 +159,21 @@ module.exports={
                 res.json(foundUser);
             })
         },
+        //message function
+        addMessage:function(req,res){
+                console.log('hit server to add message');
+                        var newContact=new Contact(req.body);
+                        newContact.save(function(err){
+                            if(err){
+                                console.log('something failed')
+                                console.log(err);
+                                res.json(1);
+                            }
+                            else{
+                                console.log('successfully saved contact')
+                                res.json(newContact);
+                            }
+                        })
+                    }
 
 }

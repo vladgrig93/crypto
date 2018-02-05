@@ -1,5 +1,6 @@
 var Cryptos=require('../controllers/cryptos.js');
 var Users=require('../controllers/cryptos.js');
+var Contact=require('../controllers/cryptos.js');
 var path=require('path');
 
 module.exports=function(app){
@@ -13,6 +14,7 @@ module.exports=function(app){
     app.get('/currentuser',Users.getCurrent);
     app.get('/myport', Users.getPort);
     app.get('/delete/:id', Cryptos.deleteTrade);
+    app.post('/messages',Contact.addMessage), 
 
     app.all("*", (request, response) => { response.sendFile(path.resolve("./public/dist/index.html")) });
     }

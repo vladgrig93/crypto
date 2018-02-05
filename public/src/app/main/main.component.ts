@@ -23,5 +23,10 @@ export class MainComponent implements OnInit {
       this.scrollSentence=this.scrollArray.join('  | ');
     })
 }
+
+takeToReg(){
+  console.log('button clicked')
+    this._Router.navigate(['/reg']);
+}
 }
 

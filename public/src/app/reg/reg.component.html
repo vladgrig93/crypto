@@ -1,19 +1,46 @@
+  <div class="row" style='display:inline-block;padding-left:30px'>
+    <div class='col s8'>
+      <div class="flow-text" style="display:inline-block;border:0px;">  
+          <form id='regform' (submit)="register()" #registerForm='ngForm'>
+              <div class="input-field">
+                <input style='color:#b7ffea;' id='cfirst' type="text" name="firstname" [(ngModel)]="newUser.firstname" #firstname="ngModel" minlength='2'>
+                <label style='color:aquamarine'for="cfirst">First Name</label>
+              </div>
 
-<h6 class="flow-text" style="color:white;text-align:center;font-size:20px;">You will gain full access to all the exclusive features of cryptoswitch such as:adding or removing trades, viewing trade history, tracking portfolio performance, and much more.</h6>
+              <div class="input-field">
+                <input style='color:#b7ffea;'id='clast'type="text" name="lastname" [(ngModel)]="newUser.lastname" #lastname="ngModel" minlength='2'>
+                <label style='color:aquamarine'for="clast">Last Name</label>
+              </div>
+              <div class="input-field">
+                <input class="validate" style='color:#b7ffea;'id='cemail'type="email" name="email" [(ngModel)]="newUser.email" #email="ngModel">
+                <label style='color:aquamarine'for="cemail" data-error="Please enter a valid email">Email</label>
+              </div>
 
-<div style='text-align:center'>
-  <div class="flow-text" style="display:inline-block;border:0px;">  
-    <p style="color:white;"><b>Sign-Up</b></p>
-      <form (submit)="register()" #registerForm='ngForm'>
-        <p style="color:white;">First Name:</p> <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="text" name="firstname" [(ngModel)]="newUser.firstname" #firstname="ngModel" minlength='2'>
-        <p style="color:white;">Last Name:</p> <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="text" name="lastname" [(ngModel)]="newUser.lastname" #lastname="ngModel" minlength='2'>
-        <p style="color:white;">Email: </p><input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="text" name="email" [(ngModel)]="newUser.email" #email="ngModel">
-        <p style="color:white;">Password:</p> <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="password" name="password" [(ngModel)]="newUser.password" #password="ngModel" minlength="8">
-        <p *ngIf='password.invalid && password.touched' [ngStyle]="{'color':'red'}">Password must be at least 8 characters long</p>
-        <p style="color:white;">Password Confirmation: </p><input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="password" name="passwordConfirm" [(ngModel)]="newUser.passwordConfirm" #passwordConfirm="ngModel">
-        
-        <input type="submit" value="Sign-Up" [disabled]=registerForm.invalid class="btn waves-effect waves-light">
-      </form>
+              <div class="input-field">
+                <input style='color:#b7ffea;'id='cpass' type="password" name="password" [(ngModel)]="newUser.password" #password="ngModel" minlength="8">
+                <label style='color:aquamarine'for="cpass">Password</label>
+              </div>
 
+                <p *ngIf='password.invalid && password.touched' style='color:red;font-size:12px'>Password must be at least 8 characters</p>
+              <div class="input-field">
+                <input style='color:#b7ffea;'id='cconf'type="password" name="passwordConfirm" [(ngModel)]="newUser.passwordConfirm" #passwordConfirm="ngModel">
+                <label style='color:aquamarine'for="cconf">Confirm Password</label>
+                <div *ngIf='errors'style='color:red;font-size:12px'>Passwords don't match</div>
+              </div>           
+                  <input style='width:250px;border-radius:7px;' type="submit" value="Sign-Up" [disabled]=registerForm.invalid class="btn waves-effect waves-light">
+          </form>
+      </div>
+    </div>
   </div>
-</div>
+  <div class="row" style='display:inline-block;vertical-align:top;padding-top:20px'>
+    <div class='col s9 push-s2'>
+      <h6 class="flow-text" style="color:white;font-size:20px;">You will gain full access to all the exclusive features of transcrypter such as</h6>
+        <ul id='animateme' class="flow-text" style="padding-left:30px">
+          <li class="flow-text" style='list-style-type: circle;color:aquamarine'>Adding or removing trades</li>
+          <li class="flow-text" style='list-style-type: circle;color:white'>Viewing trade history</li>
+          <li class="flow-text" style='list-style-type: circle;color:aquamarine'>Tracking portfolio performance</li>
+          <li class="flow-text" style='list-style-type: circle;color:white'>Tracking Crypto performance</li>
+          <li class="flow-text" style='list-style-type: circle;color:aquamarine'>And much more</li>
+        </ul>
+    </div> 
+  </div>  

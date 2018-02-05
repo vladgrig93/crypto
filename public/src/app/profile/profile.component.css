@@ -18,3 +18,10 @@ background: -webkit-linear-gradient(to top, #4B79A1,#283E51);  /* Chrome 10-25, 
 background: linear-gradient(to top, #4B79A1,#283E51); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
+
+@font-face {
+    font-family: 'subzero';
+    src:url('./../../assets/fonts/earthorbiter.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

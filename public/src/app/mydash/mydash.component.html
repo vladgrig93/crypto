@@ -1,32 +1,75 @@
-<h1 style='color:white'>Your Crypto Trades</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="node_modules/chart.js/src/chart.js"></script>
+</head>
+<body>    
 
-<table class="highlight">
-  <tr style="color:whitesmoke">
-    <th>Crypto</th>
-    <th>Date of Trade</th> 
-    <th>Time of Trade</th>
-    <th>Amount Received</th>
-    <th>Trade Price per Crypto</th>
-    <th>Current Price per Crypto</th>
-    <th>Total Trade Amount</th>
-    <th>Net Gain/Loss(Fiat)</th>
-    <th>Trade Performance</th>
-  </tr>
-  <tr *ngFor='let stat of afterArray' style="color:black;overflow:scroll">
-    <td>{{stat.name}}</td>
-    <td>{{stat.date}} </td> 
-    <td>{{stat.time}}</td>
-    <td>{{stat.amount}}</td>
-    <td>{{stat.pricethen}}</td>
-    <td>{{stat.currentprice}}</td>
-    <td>{{stat.totalthen}}</td>
-    <td>{{stat.difference}}</td>
-    <td>{{stat.change}}</td>
-    <td><a href='javascript:void(0)' (click)='onDelete(stat.id)'>Delete Trade</a></td>
-  </tr>
-</table>
-  <h3>Performance</h3>
 
-    <p>Total invested={{totalinvested}}</p>
-    <p>Netgain={{netgain}}</p>
-    <p>% Change={{portdelta}}</p>
+<div style="padding:10px;padding-left:20px">
+  <h4 style='color:#a5f3ff; margin-bottom:20px;border-bottom:#48b1bf solid 0.1px'>Crypto Portfolio</h4>
+
+  <table class="responsive-table" style='margin-bottom:30px;'>
+  <table class="highlight">
+    <tr style="color:lightcyan;">
+      <th style="text-align:right">Crypto</th>
+      <th style="text-align:right">Date Traded</th> 
+      <th style="text-align:right">Time Traded</th>
+      <th style="text-align:right">Amount Received</th>
+      <th style="text-align:right">Trade Price per Crypto</th>
+      <th style="text-align:right">Current Price per Crypto</th>
+      <th style="text-align:right">Total Trade Amount</th>
+      <th style="text-align:right">Net Gain/Loss</th>
+      <th style="text-align:right">Trade Performance</th>
+    </tr>
+    <tr *ngFor='let stat of afterArray' style="color:#6ad7ff;">
+      <td style="text-align:center">{{stat.name}}</td>
+      <td style="text-align:center">{{stat.date | date:mediumDate}} </td> 
+      <td style="text-align:center">{{stat.time}}</td>
+      <td style="text-align:right">{{stat.amount}}</td>
+      <td style="text-align:right">{{stat.pricethen | currency:'$' : 4}}</td>
+      <td style="text-align:right">{{stat.currentprice | currency:'$' : 4}}</td>
+      <td style="text-align:right">{{stat.totalthen | currency:'$' : 4}}</td>
+      <td *ngIf='stat.pos_neg' style='color:aquamarine;text-align:right'>+ {{stat.difference | currency:'$' : 4}}</td>
+      <td *ngIf='!stat.pos_neg' style='color:#ff0c55;text-align:right'> {{stat.difference | currency:'$' : 4}}</td>
+      <td *ngIf='stat.pos_neg' style='color:aquamarine;text-align:right'>+ {{stat.change | percent:'1.2-2'}}</td>
+      <td *ngIf='!stat.pos_neg' style='color:#ff0c55;text-align:right'>{{stat.change | percent:'1.2-2'}}</td>
+      <td><a href='javascript:void(0)' (click)='onDelete(stat.id)'><i class="material-icons">delete_forever</i>
+</a></td>
+    </tr>
+  </table>
+  </table>
+</div>
+<div style="padding:10px;padding-left:20px">
+    <h5 style='color:#a5f3ff;margin-bottom:20px;border-bottom:#06beb6 solid 0.1px'>Portfolio Metrics</h5>
+</div>
+<div class="row">
+    <div class='col s6' style="display:inline-block;padding-left:20px;vertical-align:top">
+      <ul id='animateme' style='margin-bottom:50px'>
+        <li style="color:lightcyan;padding-left:15px;font-size:18px">Total Invested | <span style='color:#6ad7ff;text-align:right'>{{totalinvested | currency:'$' : 4}}</span></li>
+        <li style="color:lightcyan;padding-left:15px;;font-size:18px">Net Gain |
+          <span *ngIf='sodl' style='color:aquamarine'> + {{netgain | currency:'$' : 4}}</span>
+          <span *ngIf='!sodl' style='color:#ff7777'>  {{netgain | currency:'$' : 4}}</span>
+        </li>
+        <li style="color:lightcyan;padding-left:15px;;font-size:18px">Portfolio Change |
+          <span *ngIf='sodl' style='color:aquamarine'> + {{portdelta | percent:'1.2-2'}}</span>
+          <span *ngIf='!sodl' style='color:#ff7777'>  {{portdelta | percent:'1.2-2'}}</span>
+        </li>
+        <li style="color:lightcyan;padding-left:15px;;font-size:18px">Portfolio Value | <span style='color:#6ad7ff;text-align:right'>{{totalPortfolioValue | currency:'$' : 4}}</span></li>
+
+      </ul>
+    </div>
+    <div class='col s5 push-s1' style="display:inline-block;margin-bottom:40px;">
+      <p style="color:lightcyan;padding-bottom:20px;font-size:18px;text-align:center">Portfolio Allocation</p>
+      <canvas id='canvas'>{{myChart}}</canvas>
+    </div>
+    <div class='col s8' style="display:inline-block;margin-bottom:40px;">
+      <p style="color:lightcyan;padding-bottom:20px;font-size:18px;text-align:center">Trade/Market Performance</p>
+      <canvas id='canvas2'>{{myBarChart}}</canvas>
+    </div>
+</div>
+</body>

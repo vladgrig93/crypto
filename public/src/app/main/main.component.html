@@ -12,22 +12,23 @@
 <marquee behavior="scroll" direction="left" style="color:#99ccff;font-size:20px">{{scrollSentence}}</marquee>
 <div style='display:block;text-align:center'>
   <h1 class="flow-text" style="color:white;margin-top:70px;"> BROWSE, TRACK, CONVERT, AND MANAGE CRYPTO TRADES</h1>
-  <h4 class="flow-text" style="color:darkgrey;margin-top:50px">Join today and begin tracking profits on your crypto trading journey</h4>
+  <h4 class="flow-text" style="color:#b7ffea; ;margin-top:50px">Join today and begin tracking profits on your crypto trading journey</h4>
   <div style='display:inline-block;margin-top:70px'>
-    <form id="form1">
-        <i class="fa fa-envelope" aria-hidden="true" style="color:white;"></i>
-        <p><input type="email" name='email' placeholder="Enter email" style='background-color:whitesmoke;border-radius:5px;text-align:center'></p>
-    </form>
-            <button type="submit" form="form1" value="Submit" class="btn btn-floating cyan pulse "><i class="material-icons" style='font-size: 25px'>chevron_right</i></button>
-
+    <a [routerLink]="['/reg']" style='background-color:#06beb6'class="btn btn-floating pulse"><i class="material-icons" style='font-size: 25px'>arrow_drop_down</i></a>
   </div>
 </div>
+<div style="padding-left:200px;padding-top:50px">
+  <router-outlet></router-outlet>
+</div>
 
-<footer class="page-footer" style='background-color:whitesmoke;'>
-  <div style="display:block;text-align:center;margin-top:100px">
-      <a href="https://www.linkedin.com/in/vladimirgrigoryan/"><i class="fa fa-linkedin-square fa-4" aria-hidden="true" style='font-size: 20px;padding:5px'></i></a>
-      <a href="https://github.com/vladgrig93"><i class="fa fa-github fa-4" aria-hidden="true" style='font-size: 20px;padding:5px'></i></a>
-    <p class="flow-text" style='font-size:14px;color:#39659b'>&copy; 2018 transcrypter: All rights reserved</p>
+<footer class="page-footer" style='background: #06beb6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #48b1bf, #06beb6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #48b1bf, #06beb6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+;height:90px'>
+  <div style="display:block;text-align:center;margin-top:100px;padding:15px">
+      <a style='color:white' href="https://www.linkedin.com/in/vladimirgrigoryan/"><i class="fa fa-linkedin-square fa-4" aria-hidden="true" style='font-size: 20px;padding:5px'></i></a>
+      <a style='color:white;' href="https://github.com/vladgrig93"><i class="fa fa-github fa-4" aria-hidden="true" style='font-size: 20px;padding:5px'></i></a>
+    <p class="flow-text" style='font-size:14px;color:white'>&copy; 2018 Transcrypter: All rights reserved</p>
   </div>
 </footer>
 

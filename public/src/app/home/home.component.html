@@ -7,81 +7,84 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title></title>
 </head>
+<body>
 
-<h6 style="color:white;padding-left:10px">Enter in trades made and track to view crypto-performance and coin-stats</h6>
+  <h6 style="color:white;padding-left:10px;display:block;margin:10px;margin-bottom:40px;text-align:center;font-size:20px">Enter in trades made to track crypto-performance and coin-stats</h6>
 
-<div class="row">
-  <form (submit)='convert()' #Form='ngForm'>
-    <div class="row">
-      <div class="input-field col s3">
-        <select id='cname' name='name' [(ngModel)]="newCoin.name" materialize="material_select">
-          <option *ngFor='let coin of coins'>{{coin}}</option>
-        </select>
-        <label for='cname' style='color:white;'>Crypto-Currency:</label>
+  <div style="width:300px;margin:20px;display:inline-block;border:solid#0ED7A9 2px;border-radius:10px;padding:20px">
+      <form id='form2' (submit)='convert()' #Form='ngForm' class="col s5">
+          
+          <div style='color:#b7ffea' class="input-field col s5">
+            <select id='cname' name='name' [(ngModel)]="newCoin.name" materialize="material_select">
+              <option  *ngFor='let coin of coins'>{{coin}}</option>
+            </select>
+            <label for='cname'style='color:white;font-size:16px;'>Crypto-Currency:</label>
+          </div>
+          
+          <div class="input-field col s5">
+            <p style='color:white;'>Date of Trade:</p>
+            <input id='cdate' type="date" name='date' style='color:#b7ffea' [(ngModel)]="newCoin.date">
+          </div>
+          
+          <div class="input-field col s5">
+            <p style='color:white;'>Time of Trade:(UTC)</p>
+            <input id='ctime' type="time" name='time' style='color:#b7ffea' [(ngModel)]="newCoin.time">
+          </div>
+          
+          <div class="input-field col s5">
+            <input id='camount' type="number" style='color:#b7ffea' name='amount'[(ngModel)]="newCoin.amount">
+            <label style='color:white;' for="camount">Amount Received</label>
+          </div>  
+      </form>  
+      
+      <div style="padding-left:105px;padding-top:20px">
+        <button style='background-color:#06beb6' (click)='animate()' type="submit" form="form2" value="Convert" class="btn btn-floating pulse">
+                <i class="material-icons">arrow_forward</i>
+        </button>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s3">
-        <input id='cdate' class="datepicker" type="text" name='date' [(ngModel)]="newCoin.date">
-        <label for="cdate" style='color:white;'>Date of Trade:</label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s3">
-        <input id='ctime' type="text" class="timepicker" name='time'[(ngModel)]="newCoin.time">
-        <label style='color:white;' for="ctime">Time of Trade:(UTC)</label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s3">
-        <input id='camount' type="number" name='amount'[(ngModel)]="newCoin.amount">
-        <label style='color:white;' for="camount">Amount Received</label>
-      </div> 
-    </div>    
-    <input type="submit" value='Convert' class="btn waves-effect waves-light">
-  </form>  
-</div>
   
+  </div>
 
   
  
 
-<fieldset style='display:inline;vertical-align:top;border:0px;margin-left:300px;'>
-<div *ngIf='error1'>
-  <div class="flow-text" style='color:red;font-size:18px;'>
-    <p>Sorry, price data for {{newCoin.name}} does not exist for the specified date-time.</p>
-    <p>Please try a more recent date</p>
-  </div>
-</div>
-<div *ngIf='success && !portclicked'  style='-webkit-transition: width 2s, height 4s;
-    transition: width 2s, height 4s'>
-    <h3 style='color:white;'>Crypto Performance</h3>
-    <ul>
-    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text">A single <b>{{newCoin.name}}</b> was worth <b>{{singlevalue | currency:'$' : 4}}</b> at the time of the trade</li>
-    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text">Total worth of <b>{{newCoin.name}}</b> from the trade was <b>{{totalvalue | currency:'USD'}}</b> </li>
+<div style='display:inline-block;vertical-align:top;margin-left:170px'>
     
-    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='singlenet'>As of now <b>{{newCoin.name}}</b> is up <span style='color:#0ED7A9'>{{coindelta | percent:'1.2-2'}} ({{singledifference | currency:'USD':'1.5-5'}})</span> at <b>{{currentprice | currency:'USD':'1.2-2'}}</b></li>
-    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!singlenet'>As of now <b>{{newCoin.name}}</b> is down <span style='color:#F47454'>{{coindelta | percent:'1.2-2'}} ({{singledifference | currency:'USD':'1.5-5'}})</span> at <b>{{currentprice | currency:'USD':'1.2-2'}}</b></li>
+    <div *ngIf='error1'>
+      <div id='coinstatsstagger' class="flow-text" style='color:#ff0c55;font-size:18px;'>
+        <p>Sorry, price data for {{newCoin.name}} does not exist for the specified date-time.</p>
+        <p>Please try a more recent date</p>
+      </div>
+    </div>
 
-    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='net'>You have a net <b>profit</b> of <span style='color:#0ED7A9'>{{difference | currency:'USD':'1.2-2'}}</span></li>
-    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!net'>You have a net <b>loss</b> of <span style='color:#F47454'>{{difference | currency:'USD':'1.2-2'}}</span></li>
-    <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!net'>HODL on!</li>
-    </ul>
+    <div *ngIf='success && !portclicked'>
+        <ul id='coinstatsstagger'>
+          <li style='color:white;font-size:30px;margin-left:20px'>Crypto Performance</li>
+          <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text">A single <b>{{newCoin.name}}</b> was worth <b>{{singlevalue | currency:'$' : 4}}</b> at the time of the trade</li>
+          <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text">Total worth of <b>{{newCoin.name}}</b> from the trade was <b>{{totalvalue | currency:'USD'}}</b> </li>
+          
+          <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='singlenet'>As of now <b>{{newCoin.name}}</b> is up <span style='color:#0ED7A9'>{{coindelta | percent:'1.2-2'}} ({{singledifference | currency:'USD':'1.5-5'}})</span> at <b>{{currentprice | currency:'USD':'1.2-2'}}</b></li>
+          <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!singlenet'>As of now <b>{{newCoin.name}}</b> is down <span style='color:#F47454'>{{coindelta | percent:'1.2-2'}} ({{singledifference | currency:'USD':'1.5-5'}})</span> at <b>{{currentprice | currency:'USD':'1.2-2'}}</b></li>
+
+          <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='net'>Trade resulted in a net <b>profit</b> of <span style='color:#0ED7A9'>{{difference | currency:'USD':'1.2-2'}}</span></li>
+          <li style='font-size:18px;list-style-type: circle;margin:30px;color:whitesmoke;' class="flow-text" *ngIf='!net'>Trade resulted in a net <b>loss</b> of <span style='color:#F47454'>{{difference | currency:'USD':'1.2-2'}}</span></li>
+        </ul>
+    </div>
+
+    <div *ngIf='message && success && !portclicked'>
+      <form (submit)='addtoPort()' #Form='ngForm' id='addPort'>
+      </form>
+      <button style='margin-left:250px;margin-top:10px;border-radius:8px' type="submit" class='btn waves-effect waves-light' form='addPort'>Add to Portfolio</button>
+    </div>
+
+    <div *ngIf='portclicked && success'>
+      <ul>
+        <li style='color:#b7ffea;font-size:24px'>Trade Added to Portfolio!</li>
+      </ul>
+    </div>
+
 </div>
 
 
-  <div *ngIf='message && success && !portclicked'>
-    <form (submit)='addtoPort()' #Form='ngForm'>
-      <input class="btn waves-effect waves-light" type="submit" value='Add Trade to Portfolio'>
-    </form>
-  </div>
-
-<div *ngIf='portclicked && success'>
-  <h1>Trade added to Portfolio!</h1>
-</div>
-
-
-</fieldset>
+</body>
+</html>

@@ -3,6 +3,7 @@ import {DataService} from './../data.service';
 import { Router } from '@angular/router';
 
 declare var jQuery:any;
+declare var Materialize:any;
  
 @Component({
   selector: 'app-home',
@@ -39,7 +40,20 @@ portclicked:any;
   }
 
 ngOnInit(){
-    jQuery(this.elementRef.nativeElement).find('.datepicker').pickadate({
+    
+
+  this.portclicked=false;
+  this._DataService.getAllCoins().subscribe((data:any)=>{
+    this.fullres=data;
+    for(var value in data.Data){
+      this.coins.push(value);
+    }
+  })
+  this._DataService.currentMessage.subscribe(message => this.message = message)
+  // this.newMessage();
+  // console.log('message in child convert', this.message)
+
+  jQuery(this.elementRef.nativeElement).find('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15, // Creates a dropdown of 15 years to control year,
     today: 'Today',
@@ -58,18 +72,8 @@ ngOnInit(){
     ampmclickable: true, // make AM PM clickable
     aftershow: function(){} //Function for after opening timepicker
   })
-
-  this.portclicked=false;
-  this._DataService.getAllCoins().subscribe((data:any)=>{
-    this.fullres=data;
-    for(var value in data.Data){
-      this.coins.push(value);
-    }
-  })
-  this._DataService.currentMessage.subscribe(message => this.message = message)
-  // this.newMessage();
-  // console.log('message in child convert', this.message)
 }
+
 
 addtoPort(){
   this._DataService.addCryptoPort(this.tradeObject).subscribe((data:any)=>{
@@ -85,8 +89,11 @@ convert(){
     this.tradedata=JSON.parse(data['_body']);
     console.log('DATA BODY is', this.tradedata);
     console.log('CRYPTO ID IS', this.tradedata._id)
-
+    console.log('date is',this.newCoin.date)
+    console.log('time is',this.newCoin.time)
+    
     var datetime:string=String(this.newCoin.date)+" "+String(this.newCoin.time)+":00.000"
+    console.log('datetime', datetime)
     var unixTimestamp = Math.round(new Date(datetime).getTime()/1000);
     this._DataService.getData(this.newCoin.name, unixTimestamp).subscribe((data:any)=>{
       this.senddata=data;
@@ -132,6 +139,10 @@ convert(){
   
   })
     this.portclicked=false;
-
 }
+
+animate(){
+  Materialize.fadeInImage('#coinstatsstagger');
+}
+
 }

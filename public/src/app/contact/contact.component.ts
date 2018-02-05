@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class ContactComponent implements OnInit {
 
   message:boolean;
+  newContact:any = {email:'', message:''}
+  errors: any[]
+  contactSent:any;
   constructor(private _DataService:DataService, private _Router:Router){}
 
   ngOnInit() {
@@ -20,4 +23,18 @@ export class ContactComponent implements OnInit {
 // newMessage() {
 //     this._DataService.changeMessage(true)
 //   }
+
+    onContactSend(){
+      	this._DataService.addMessage(this.newContact)
+  	.subscribe((data:any)=>{
+  		console.log("got response from server:", data);
+  		if(data._body==1){
+  			console.log("something went wrong");
+  			this.errors = data;
+      }
+      else{
+  			this.contactSent=true;
+      }
+  	})
+  }
 }

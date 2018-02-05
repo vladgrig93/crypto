@@ -1,18 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {DataService} from './../data.service';
+
+
+declare var Materialize:any;
+
+
 @Component({
   selector: 'app-reg',
   templateUrl: './reg.component.html',
   styleUrls: ['./reg.component.css']
 })
+
 export class RegComponent implements OnInit {
+
+  
 
 newUser:any = {firstname: "", lastname: "", email: "", password: "", passwordConfirm: ""};
 errors: any[];
   constructor(private _DataService:DataService, private _Router:Router) { }
 
   ngOnInit() {
+  Materialize.showStaggeredList('#animateme')
   }
  register(){
   	this._DataService.addUser(this.newUser)

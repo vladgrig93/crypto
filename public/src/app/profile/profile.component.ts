@@ -22,7 +22,9 @@ export class ProfileComponent implements OnInit {
     this._DataService.currentMessage.subscribe(message => this.message = message)
     console.log('message in parent profile', this.message)
 
-  }
+}
+
+  
 
   newMessage() {
     this._DataService.changeMessage(true)

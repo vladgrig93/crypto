@@ -7,18 +7,29 @@
    <title>Document</title>
  </head>
  <body>
+   <div class="container">
    
+      <h6 class='flow-text' style='color:white;text-align:center;margin-bottom:43px'>Have suggestions for improvement, or inquiries? We'd love to hear your feedback, so please shoot us a message</h6>						
+      <div style='text-align:center;'>
+        <div *ngIf='!contactSent' style='display:inline-block'>      
+            <form style='margin-bottom:150px;'id='contactform' (submit)='onContactSend()'>
+              <div class="input-field col s5">
+                <input style='color:#b7ffea'id='memail' *ngIf='!message'name="email"type="email" class='validate' [(ngModel)]="newContact.email">
+                <label  *ngIf='!message' style='color:aquamarine'for='memail' data-error='Please enter a valid email'>E-mail</label>
+              </div>
+              <div style='margin-bottom:20px;' class="input-field col s5">
+                <textarea id='mmessage' name="message" style="width:300px;height:80px;color:#b7ffea" [(ngModel)]="newContact.message"></textarea>
+                <label style='color:aquamarine' for='mmessage'>Message</label>
+              </div>
+                <button style='background-color:aquamarine;border-radius:10px' type='submit' form="contactform" class="btn waves-effect waves-light" value='send'>
+                  <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
+        <div *ngIf='contactSent' style='color:aquamarine'>Thank you, your message has been sent and one of our representatives will get back to you shortly</div>
+      </div>
+   </div>
  </body>
  </html> 
-    <p class='flow-text' style='color:white;size:15px'>Have suggestions for improvement, or inquiries? We'd love to hear your feedback, so please shoot us a message</p>						
-<div style='text-align:center'>
-<div style='display:inline-block'>      
-    <form action="" method="POST">
-        <p style='color:white;' *ngIf='!message'>Email</p>
-        <input *ngIf='!message' style='background-color:whitesmoke;border-radius:5px;'name="email" placeholder="Your email" type="email">
-        <p style='color:white;'>Message</p>
-        <textarea style='background-color:whitesmoke;border-radius:5px;' name="message"  placeholder="Your message"></textarea>
-        <input type="submit" value="Send Message" class="btn waves-effect waves-light">
-      </form>
-</div>
-</div>
+
+

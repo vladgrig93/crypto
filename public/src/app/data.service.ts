@@ -20,8 +20,12 @@ export class DataService {
 
 
   constructor(private _http:Http) {
+
     
   }
+
+
+
    changeMessage(message: boolean) {
     this.messageSource.next(message)
   }
@@ -50,9 +54,10 @@ export class DataService {
 
   getCurrentforPort(names){
     console.log('getting current prices for portfolio', names);
+    var link='https://min-api.cryptocompare.com/data/pricemulti?fsyms='+names+'&tsyms=USD'
+    console.log('link in data service is', link)
     return this._http.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms='+names+'&tsyms=USD')
     .map(portprices => this.portprices= portprices.json());
-
 }
 
   convertCoin(coin){
@@ -87,6 +92,9 @@ export class DataService {
   getUser(){
     return this._http.get('/currentuser');
   }
+  //MESSAGE functions
 
-
+  addMessage(messageObj){
+      return this._http.post('/messages', messageObj);
+  }
 }

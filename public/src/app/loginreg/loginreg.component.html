@@ -1,11 +1,33 @@
-<div style='text-align:center'>
-<div style="display:inline-block;">
-    <p style="color:white;"><b>Sign-In</b></p>
-    <form (submit)="login()">
-      <p style="color:white;">Email:</p> <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="text" name="email" [(ngModel)]="user.email" #email="ngModel">
-      <p style="color:white;">Password:</p>  <input style='background-color:whitesmoke;border-radius:5px;text-align:center' type="password" name="password" [(ngModel)]="user.password" #password="ngModel">
-      <input type="submit" value="Sign-In" class="btn waves-effect waves-light">
-      
-    </form>
-</div>
+<div class="container"style='padding-top:70px'>
+  <div class='row'>
+    <div class='col s12'>
+            <div style='text-align:center'>
+              <h3 class='flow-text' style='color:lightcyan'>Sign In and view your portfolio performance</h3>
+            </div>
+      </div>
+  </div>
+  <div class='row'>
+    <div class='col s12'>
+      <div style='text-align:center'>
+      <div style="display:inline-block;">
+          <form id='login' (submit)="login()" style='margin-bottom:240px;'>
+            <div class="row">
+              <div class="input-field">
+                <input id='cemail' style='text-align:center;width:300px;color:#b7ffea' type="text" name="email" [(ngModel)]="user.email" #email="ngModel">
+                <label style='color:aquamarine'for='cemail'>E-mail</label>
+              </div>
+            </div>
+            <div class='row'>
+              <div class="input-field">
+                <input id='cpass' style='text-align:center;width:300px;color:#b7ffea' type="password" name="password" [(ngModel)]="user.password" #password="ngModel">
+                <label style='color:aquamarine'for='cpass'>Password</label>
+              </div>
+            </div>
+            <div *ngIf='errors' style='color:#ff4965;font-size:14px;margin-bottom:10px'>Email or password is incorrect, please try again</div>
+            <button type='submit' value='SignIn' form='login' class="btn waves-effect waves-light" style='border-radius:7px;'>Sign-In</button>
+          </form>
+      </div>
+      </div>
+    </div>
+  </div>
 </div>
