@@ -197,12 +197,17 @@ getPort(){
                               type:'bar',
                               fill:false,
                               backgroundColor:"rgba(66, 244, 238, 0.7)",
+                              // borderColor:'rgb(66, 244, 238)'
+
+
                             },
                             {
                               label:'Market Worth',
                               data:this.barTotalNow,
                               type:'line',
                               borderColor:'#b2ffb2',
+                              
+
                             }
                                     ],
                         },
@@ -228,16 +233,14 @@ getPort(){
                                             }
                                           },
                                     scales: {
-                                                yAxes: [{
-                                                    ticks: {
-                                                        beginAtZero:true,
-                                                        fontColor:'black',
-                                                    },
-                                                    scaleLabel:{
-                                                      display: true,
-                                                      labelString: '$',
+                                              scales: {
+                                                        xAxes: [{
+                                                            stacked: true
+                                                        }],
+                                                        yAxes: [{
+                                                            stacked: true
+                                                        }]
                                                     }
-                                                }],
                                     }
         })
 
@@ -269,6 +272,10 @@ onDelete(cryptoid){
     this.barArray.length=0;
     this.pieChartData.length=0;
     this.pieChartLabels.length=0;
+    this.barDate.length=0;
+    this.barCoin.length=0;
+    this.barTotalThen.length=0;
+    this.barTotalNow.length=0;
     this.getPort();
 
   })

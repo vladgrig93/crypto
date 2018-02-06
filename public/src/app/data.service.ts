@@ -31,7 +31,7 @@ export class DataService {
   }
 
    getAllCoins(){
-     return this._http.get('https://www.cryptocompare.com/api/data/coinlist/')
+     return this._http.get('https://min-api.cryptocompare.com/data/all/coinlist')
      .map(result => this.result = result.json());
   }
 
