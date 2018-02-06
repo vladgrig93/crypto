@@ -15,11 +15,11 @@
       ">
           <h5 class="flow-text" style="color:white;padding-left:20px;padding:20px;font-family:subzero">Welcome {{currentUser.firstname}}</h5>
           <div class="fixed-action-btn horizontal" style="position:float;top:35px;right:50px;">
-            <a class="btn-floating btn-large waves-effect waves-light" style='background-color:#42ebf4' [routerLink]="['mydash']" (click)='onHomeClick()'><i class="material-icons" style='font-size:35px;padding-right:9px;margin-top:-5px'>equalizer</i></a>
+            <a class="btn btn-floating btn-large pulse" style='background-color:#42ebf4' [routerLink]="['mydash']" (click)='onHomeClick()'><i class="material-icons" style='font-size:35px;padding-right:9px;margin-top:-5px'>equalizer</i></a>
             <ul>
-              <li><a class="btn-floating  waves-effect waves-light"   style='background-color:#9ef7d2' [routerLink]="['convert']" (click)='otherClick()'><i class="material-icons" style='padding-right:9px;padding-top:2px;margin-top:-7px'>add_circle_outline</i></a></li>
-              <li><a class="btn-floating  waves-effect waves-light"  style='background-color:#63a6ff' [routerLink]="['contact']"(click)='otherClick()'><i class="material-icons" style='padding-right:9px;margin-top:-6px'>forum</i></a></li>
-              <li><a class="btn-floating  waves-effect waves-light" style='background-color:#ff4762' href='javascript:void(0)' (click)='onSignOut()'><i class="material-icons" style='padding-right:9px;margin-top:-6px;'>close</i></a></li>
+              <li style="color:white;padding:7px"><a class="btn-floating  waves-effect waves-light"   style='background-color:#9ef7d2;margin:3px' [routerLink]="['convert']" (click)='otherClick()'><i class="material-icons" style='padding-right:9px;padding-top:2px;margin-top:-7px'>add_circle_outline</i></a>Add Trade</li>
+              <li style="color:white;padding:7px"><a class="btn-floating  waves-effect waves-light"  style='background-color:#63a6ff;margin:3px' [routerLink]="['contact']"(click)='otherClick()'><i class="material-icons" style='padding-right:9px;margin-top:-6px'>forum</i></a>Message</li>
+              <li style="color:white;padding:7px"><a class="btn-floating  waves-effect waves-light" style='background-color:#ff4762;margin:3px' href='javascript:void(0)' (click)='onSignOut()'><i class="material-icons" style='padding-right:9px;margin-top:-6px;'>close</i></a>Sign Out</li>
             </ul>
           </div>
   </div>
