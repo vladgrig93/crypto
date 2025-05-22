@@ -1,7 +1,7 @@
 var mongoose=require('mongoose');
 var bcrypt = require('bcrypt-as-promised');
 var Schema=mongoose.Schema
-
+'test
 var CryptoSchema=new mongoose.Schema({
     name:String,
     date:String,
